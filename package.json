@@ -1,0 +1,29 @@
+{
+  "name": "t-nuke",
+  "version": "0.0.1",
+  "description": "",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.16.3",
+    "twit": "^2.2.11"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "mocha": "^5.2.0",
+    "sinon": "^6.1.4"
+  },
+  "scripts": {
+    "test": "mocha $(find . -name '*.spec.js' -not -path './node_modules/*')",
+    "start": "nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/aarogrammer/t-nuke.git"
+  },
+  "author": "Aaron Welsh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/aarogrammer/t-nuke/issues"
+  },
+  "homepage": "https://github.com/aarogrammer/t-nuke#readme"
+}
