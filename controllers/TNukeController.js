@@ -1,8 +1,8 @@
 class TNukeController {
 
     constructor(twitConfg, tweet_options) {
-        this.twitConfig     = twitConfg;
-        this.tweet_options  = tweet_options;
+        this.twitConfig         = twitConfg;
+        this.tweet_options      = tweet_options;
     }
 
     /**
@@ -24,6 +24,7 @@ class TNukeController {
             result.data.map(tweets => {
                 tweet_arr.push(tweets.text);
             });
+            console.log(tweet_arr)
         })
         .catch(err => {
             console.log(err);

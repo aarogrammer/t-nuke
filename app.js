@@ -2,6 +2,7 @@ const express           = require('express');
 const app               = express();
 const TNukeController   = require('./controllers/TNukeController');
 const Twit              = require('twit');
+
 const { 
     APP_PORT,
     CONSUMER_KEY,
@@ -16,7 +17,8 @@ const twit = new Twit({
     access_token:         ACCESS_TOKEN,
     access_token_secret:  ACCESS_TOKEN_SECRET,
     timeout_ms:           60*1000,
-    strictSSL:            true,  
+    strictSSL:            true, 
+    app_only_auth:        true 
 });
 
 // These options will be passed via params once routes are set up.
@@ -28,6 +30,7 @@ let tweet_options = {
 const tnukecontroller = new TNukeController(twit, tweet_options);
 
 tnukecontroller.runNuke();
+
 
 app.listen(APP_PORT, () => {
     console.log(`App running on port: ${APP_PORT}`);
