@@ -21,16 +21,13 @@ Clone the repo
     export APP_PORT=''
     export CONSUMER_KEY=''
     export CONSUMER_SECRET=''
-    export ACCESS_TOKEN=''
-    export ACCESS_TOKEN_SECRET=''
 ```
 | Command | Description | Example/More Information |
 | --- | --- | --- |
-| `export APP_PORT=''` | The port to run your express server on | 8080 |
-| `export CONSUMER_KEY=''` | The consumer key to your application | https://developer.twitter.com/en/docs/basics/authentication/guides/access-tokens.html |
-| `export CONSUMER_SECRET=''` | The consumer secret to your application | https://developer.twitter.com/en/docs/basics/authentication/guides/access-tokens.html |
-| `export ACCESS_TOKEN=''` | The access token to your application | https://developer.twitter.com/en/docs/basics/authentication/guides/access-tokens.html |
-| `export ACCESS_TOKEN_SECRET=''` | The access token secret to your application | https://developer.twitter.com/en/docs/basics/authentication/guides/access-tokens.html |
+| `export TNUKE_APP_PORT=''` | The port to run your express server on | 8080 |
+| `export TNUKE_CONSUMER_KEY=''` | The consumer key to your application | https://developer.twitter.com/en/docs/basics/authentication/guides/access-tokens.html |
+| `export TNUKE_CONSUMER_SECRET=''` | The consumer secret to your application | https://developer.twitter.com/en/docs/basics/authentication/guides/access-tokens.html |
+| `export TNUKE_CALLBACK_URL=''` | Callback URL for when user has logged in | https://developer.twitter.com/en/docs/basics/developer-portal/guides/callback-urls.html |
 
 ### Start Application
 > **Ensure you have *nodemon* installed** `npm i -g nodemon`
