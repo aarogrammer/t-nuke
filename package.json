@@ -5,6 +5,9 @@
   "main": "app.js",
   "dependencies": {
     "express": "^4.16.3",
+    "express-session": "^1.15.6",
+    "passport": "^0.4.0",
+    "passport-twitter": "^1.0.4",
     "twit": "^2.2.11"
   },
   "devDependencies": {
@@ -14,7 +17,8 @@
   },
   "scripts": {
     "test": "mocha $(find . -name '*.spec.js' -not -path './node_modules/*')",
-    "start": "nodemon app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "repository": {
     "type": "git",
