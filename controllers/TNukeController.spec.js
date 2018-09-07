@@ -46,7 +46,7 @@ describe('TNukeController', () => {
     describe('TNukeController methods', () => {
 
         it('runNuke() should call getUsersTweets() method', () => {
-            let getUsersTweetsStub = sinon.stub(tnukecontroller, 'getUsersTweets').returns(Promise.resolve({then:function(){}}));
+            let getUsersTweetsStub = sinon.stub(tnukecontroller, 'getUsersTweets').returns(Promise.resolve({then:()=>{}}));
             tnukecontroller.runNuke();
             sinon.assert.calledOnce(getUsersTweetsStub);
             getUsersTweetsStub.restore();
