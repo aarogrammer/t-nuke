@@ -36,7 +36,6 @@ class TNukeController {
                 tweet_arr.push({
                     id: tweets.id_str,
                     date: tweets.created_at
-
                 });
             });
             return tweet_arr;

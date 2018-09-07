@@ -24,14 +24,15 @@ Clone the repo
 ```
 | Command | Description | Example/More Information |
 | --- | --- | --- |
-| `export TNUKE_APP_PORT=''` | The port to run your express server on | 8080 |
-| `export TNUKE_CONSUMER_KEY=''` | The consumer key to your application | https://developer.twitter.com/en/docs/basics/authentication/guides/access-tokens.html |
-| `export TNUKE_CONSUMER_SECRET=''` | The consumer secret to your application | https://developer.twitter.com/en/docs/basics/authentication/guides/access-tokens.html |
-| `export TNUKE_CALLBACK_URL=''` | Callback URL for when user has logged in | https://developer.twitter.com/en/docs/basics/developer-portal/guides/callback-urls.html |
+| `export TNUKE_APP_PORT=` | (`Number`) The port to run your express server on | 8080 |
+| `export TNUKE_CONSUMER_KEY=''` | (`String`) The consumer key to your application | https://developer.twitter.com/en/docs/basics/authentication/guides/access-tokens.html |
+| `export TNUKE_CONSUMER_SECRET=''` | (`String`) The consumer secret to your application | https://developer.twitter.com/en/docs/basics/authentication/guides/access-tokens.html |
+| `export TNUKE_CALLBACK_URL=''` | (`String`) Callback URL for when user has logged in | https://developer.twitter.com/en/docs/basics/developer-portal/guides/callback-urls.html |
+| `export TNUKE_SESSION_SECRET=''` | (`String`) Secret for your express session | https://www.npmjs.com/package/express-session#secret|
 
 ### Start Application
-> **Ensure you have *nodemon* installed** `npm i -g nodemon`
 > npm start
 
 ### Testing Application
+**Note**: Test coverage is pretty poor atm.
 > npm test
