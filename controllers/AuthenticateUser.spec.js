@@ -13,15 +13,36 @@ describe('Controller than authenticates a user', () => {
     const CONSUMER_KEY = '';
     const CONSUMER_SECRET = '';
     const CALLBACK_URL = '';
+
     beforeEach(() => {
         authenticateUser = new AuthenticateUser(passport, Strategy, Twit, CONSUMER_KEY, CONSUMER_SECRET, CALLBACK_URL);
     });
-
     
     it('authenticateUserWithTwitter() method should have call this.passport.use method', () => {
-        let stub = sinon.stub(authenticateUser.passport, 'use');
+        const passportStub = sinon.stub(authenticateUser.passport, 'use');
         authenticateUser.authenticateUserWithTwitter();
-        sinon.assert.calledOnce(stub)
+        sinon.assert.calledOnce(passportStub)
+    });
+
+    it('userProfile() method should return 401 if not authenticated', () => {
+        let expected = 401;
+        let actual = authenticateUser.userProfile().status;
+        assert.deepEqual(expected, actual);
+    });
+
+    it('userProfile() method should return a profile object if authenticated', () => {
+        authenticateUser.profile = {
+            username: '',
+            displayName: '',
+            photos: [{value: ''}],
+            _json: {
+                followers_count: '',
+                friends_count: '',
+                description: '',
+                created_at: ''
+            }
+        };
+        assert.deepEqual(authenticateUser.userProfile().username, authenticateUser.profile.username);
     });
 
 });

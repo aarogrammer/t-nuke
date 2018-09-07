@@ -8,7 +8,7 @@ class AuthenticateUser {
         this.consumer_secret    = CONSUMER_SECRET;
         this.callback_url       = CALLBACK_URL;
         this.authenticatedTwit  = {}; // When a user has been authenticated, we will store their tokens within here.
-        this.profile; // Property to store users profile
+        this.profile;  // Property to store users profile
     }
 
     /**
@@ -52,7 +52,8 @@ class AuthenticateUser {
     userProfile() {
         if(!this.profile) {
             return {
-                data: 'No data available'
+                message: 'Not authenticated',
+                status: 401
             };
         }
         return {

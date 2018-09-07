@@ -2,7 +2,6 @@ class TNukeController {
 
     constructor(twit) {
         this.twit = twit;
-        this.runNuke();
     }
 
     /**

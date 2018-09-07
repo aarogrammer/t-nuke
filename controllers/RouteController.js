@@ -45,7 +45,8 @@ class RouteController {
         (req, res) => {
             res.redirect('/');
             console.log(`User ${req.user.username} has logged in.`)
-            new this.TNukeController(this.authenticateUser.authenticatedObject());
+            const tNukeController = new this.TNukeController(this.authenticateUser.authenticatedObject());
+            tNukeController.runNuke();
         });
         return this.router;
          
