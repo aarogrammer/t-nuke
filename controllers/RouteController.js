@@ -1,3 +1,4 @@
+const path = require('path');
 class RouteController {
 
     constructor(express, passport, TNukeController, authenticateUser) {
@@ -13,11 +14,7 @@ class RouteController {
     pageRoutes() {
 
         this.router.get('/', (req, res) => {
-            if(req.user) {
-                res.send(`Hi, ${req.user.displayName}(@${req.user.username})`)
-            } else {
-                res.send('<a href="/api/auth/twitter">Sign in with Twitter</a>');
-            }
+            res.sendFile(path.join(__dirname, '../public/views/index.html'));
         });
                
         return this.router;

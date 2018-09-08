@@ -35,6 +35,8 @@ app.use(passport.session()); // Alter session with Passport user (Twitter user)
 
 const routeController = new RouteController(express, passport, TNukeController, authenticateUser);
 
+app.use(express.static(__dirname + '/public'));
+
 // Middleware for our routes.
 app.use('/', routeController.pageRoutes());
 app.use('/api', [routeController.userAPI(), routeController.twitterAPIRoutes()]);
