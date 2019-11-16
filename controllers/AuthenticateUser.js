@@ -1,19 +1,19 @@
 class AuthenticateUser {
 
     constructor(passport, Strategy, Twit, CONSUMER_KEY, CONSUMER_SECRET, CALLBACK_URL) {
-        this.passport           = passport;
-        this.Strategy           = Strategy;
-        this.twit               = Twit;
-        this.consumer_key       = CONSUMER_KEY;
-        this.consumer_secret    = CONSUMER_SECRET;
-        this.callback_url       = CALLBACK_URL;
-        this.authenticatedTwit  = {}; // When a user has been authenticated, we will store their tokens within here.
-        this.profile;  // Property to store users profile
+        this.passport = passport;
+        this.Strategy = Strategy;
+        this.Twit = Twit;
+        this.consumer_key = CONSUMER_KEY;
+        this.consumer_secret = CONSUMER_SECRET;
+        this.callback_url = CALLBACK_URL;
+        this.authenticatedTwit = {};
+        this.profile; // Property to store users profile
     }
 
     /**
-     * 
-     * @description Use Passports Twitter strategy to authenticate a user, get their tokens, and return their profile.
+     *
+     * @description Use Passports Twitter strategy to authenticate a user.
      * @returns {Function}
      */
     authenticateUserWithTwitter() {
@@ -21,14 +21,14 @@ class AuthenticateUser {
             consumerKey: this.consumer_key,
             consumerSecret: this.consumer_secret,
             callbackURL: this.callback_url
-          }, (token, tokenSecret, profile, cb) => {
-            this.authenticatedTwit  = new this.twit({
-                consumer_key:         this.consumer_key,
-                consumer_secret:      this.consumer_secret,
-                access_token:         token,
-                access_token_secret:  tokenSecret,
-                timeout_ms:           60*1000,
-                strictSSL:            true
+        }, (token, tokenSecret, profile, cb) => {
+            this.authenticatedTwit = new this.Twit({
+                consumer_key: this.consumer_key,
+                consumer_secret: this.consumer_secret,
+                access_token: token,
+                access_token_secret: tokenSecret,
+                timeout_ms: 60 * 1000,
+                strictSSL: true
             });
             this.profile = profile;
             return cb(null, profile);
@@ -36,8 +36,7 @@ class AuthenticateUser {
     }
 
     /**
-     * 
-     * @description Returns a new Twit instance containing our consumer key and secret & the users access token & secret.
+     *
      * @returns {Object}
      */
     authenticatedObject() {
@@ -45,12 +44,12 @@ class AuthenticateUser {
     }
 
     /**
-     * 
-     * @description If a user has been authenticated, we create a profile for the user. If not authenticated, we return a message for our API.
+     *
+     * @description If a user has been authenticated, we create a profile for the user.
      * @returns {Object}
      */
     userProfile() {
-        if(!this.profile) {
+        if (!this.profile) {
             return {
                 message: 'Not authenticated',
                 status: 401

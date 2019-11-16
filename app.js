@@ -1,13 +1,13 @@
-const express           = require('express');
-const app               = express();
-const TNukeController   = require('./controllers/TNukeController');
-const AuthenticateUser  = require('./controllers/AuthenticateUser');
-const RouteController   = require('./controllers/RouteController');
-const Twit              = require('twit');
-const passport          = require('passport');
-const { Strategy }      = require('passport-twitter');
+const express = require('express');
+const Twit = require('twit');
+const passport = require('passport');
+const { Strategy } = require('passport-twitter');
 
-const { 
+const TNukeController = require('./controllers/TNukeController');
+const AuthenticateUser = require('./controllers/AuthenticateUser');
+const RouteController = require('./controllers/RouteController');
+
+const {
     APP_PORT,
     CONSUMER_KEY,
     CONSUMER_SECRET,
@@ -15,8 +15,17 @@ const {
     SESSION_SECRET
 } = require('./config/env');
 
+const app = express();
+
 // Authenticate user. Inject all our dependencies to the class.
-const authenticateUser = new AuthenticateUser(passport, Strategy, Twit, CONSUMER_KEY, CONSUMER_SECRET, CALLBACK_URL);
+const authenticateUser = new AuthenticateUser(
+    passport,
+    Strategy,
+    Twit,
+    CONSUMER_KEY,
+    CONSUMER_SECRET,
+    CALLBACK_URL
+);
 
 passport.serializeUser((user, cb) => {
     cb(null, user);
@@ -35,12 +44,12 @@ app.use(passport.session()); // Alter session with Passport user (Twitter user)
 
 const routeController = new RouteController(express, passport, TNukeController, authenticateUser);
 
-app.use(express.static(__dirname + '/public'));
+app.use(express.static('public'));
 
 // Middleware for our routes.
 app.use('/', routeController.pageRoutes());
 app.use('/api', [routeController.userAPI(), routeController.twitterAPIRoutes()]);
 
 app.listen(APP_PORT, () => {
-    console.log(`T-Nuke running on port ${APP_PORT}`);  
+    console.log(`T-Nuke running on port ${APP_PORT}`);
 });

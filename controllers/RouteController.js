@@ -1,4 +1,5 @@
 const path = require('path');
+
 class RouteController {
 
     constructor(express, passport, TNukeController, authenticateUser) {
@@ -16,12 +17,12 @@ class RouteController {
         this.router.get('/', (req, res) => {
             res.sendFile(path.join(__dirname, '../public/views/index.html'));
         });
-               
+
         return this.router;
     }
 
     /**
-     * 
+     *
      * @description Call userProfile method and send the response object.
      */
     userAPI() {
@@ -33,20 +34,23 @@ class RouteController {
 
     twitterAPIRoutes() {
         this.authenticateUser.authenticateUserWithTwitter();
-        // Initiate an OAuth transaction with Twitter. This will redirect the user to Twitter, and use the callback below.
+        // Initiate an OAuth transaction with Twitter.
         this.router.get('/auth/twitter', this.passport.authenticate('twitter'));
 
-        // We then try and get the users access token (and secret). We handle the response accordingly.
-        this.router.get('/auth/twitter/callback', 
-        this.passport.authenticate('twitter', { failureRedirect: '/#login' }),
-        (req, res) => {
-            res.redirect('/');
-            console.log(`User ${req.user.username} has logged in.`)
-            const tNukeController = new this.TNukeController(this.authenticateUser.authenticatedObject());
-            tNukeController.runNuke();
-        });
+        // We then try and get the users access token (and secret).
+        this.router.get('/auth/twitter/callback',
+            this.passport.authenticate('twitter', { failureRedirect: '/#login' }),
+            (req, res) => {
+                res.redirect('/');
+                console.log(`User ${req.user.username} has logged in.`);
+                const tNukeController = new this.TNukeController(
+                    this.authenticateUser
+                        .authenticatedObject()
+                );
+                tNukeController.runNuke();
+            });
         return this.router;
-         
+
     }
 
 }

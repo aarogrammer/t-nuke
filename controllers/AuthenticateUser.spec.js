@@ -1,32 +1,41 @@
-const { assert }            = require('chai');
-const sinon                 = require('sinon');
-const AuthenticateUser      = require('./AuthenticateUser');
+const { assert } = require('chai');
+const sinon = require('sinon');
+const AuthenticateUser = require('./AuthenticateUser');
 
 describe('Controller than authenticates a user', () => {
 
     let authenticateUser;
     const passport = {
         use: () => {}
+    };
+    function Strategy() {
+        return {};
     }
-    const Strategy = function(){}
     const Twit = '';
     const CONSUMER_KEY = '';
     const CONSUMER_SECRET = '';
     const CALLBACK_URL = '';
 
     beforeEach(() => {
-        authenticateUser = new AuthenticateUser(passport, Strategy, Twit, CONSUMER_KEY, CONSUMER_SECRET, CALLBACK_URL);
+        authenticateUser = new AuthenticateUser(
+            passport,
+            Strategy,
+            Twit,
+            CONSUMER_KEY,
+            CONSUMER_SECRET,
+            CALLBACK_URL
+        );
     });
-    
+
     it('authenticateUserWithTwitter() method should have call this.passport.use method', () => {
         const passportStub = sinon.stub(authenticateUser.passport, 'use');
         authenticateUser.authenticateUserWithTwitter();
-        sinon.assert.calledOnce(passportStub)
+        sinon.assert.calledOnce(passportStub);
     });
 
     it('userProfile() method should return 401 if not authenticated', () => {
-        let expected = 401;
-        let actual = authenticateUser.userProfile().status;
+        const expected = 401;
+        const actual = authenticateUser.userProfile().status;
         assert.deepEqual(expected, actual);
     });
 
@@ -34,7 +43,7 @@ describe('Controller than authenticates a user', () => {
         authenticateUser.profile = {
             username: '',
             displayName: '',
-            photos: [{value: ''}],
+            photos: [{ value: '' }],
             _json: {
                 followers_count: '',
                 friends_count: '',
@@ -42,7 +51,11 @@ describe('Controller than authenticates a user', () => {
                 created_at: ''
             }
         };
-        assert.deepEqual(authenticateUser.userProfile().username, authenticateUser.profile.username);
+        assert.deepEqual(
+            authenticateUser.userProfile()
+                .username,
+            authenticateUser.profile.username
+        );
     });
 
 });
